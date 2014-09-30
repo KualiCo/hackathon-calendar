@@ -4,6 +4,7 @@
 
 var React = window.React = require('react');
 var axios = require('axios');
+var     _ = require('lodash');
 
 var {Calendar, CalendarEvent} = require('./calendar');
 
@@ -58,7 +59,3 @@ var App = React.createClass({
 });
 
 React.renderComponent(<App/>, document.body);
-
-
-// <h3>List View</h3>
-// <Calendar title="Spring `14 Courses" events={this.state.events} type="list"/>
