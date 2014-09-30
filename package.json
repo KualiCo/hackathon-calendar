@@ -4,7 +4,9 @@
   "description": "",
   "repository": "",
   "scripts": {
-    "start": "node --harmony server/server.js"
+    "start": "node --harmony server/app.js",
+    "lr": "node scripts/live-reload.js",
+    "db": "node scripts/load-db.js"
   },
   "author": "",
   "license": "MIT",

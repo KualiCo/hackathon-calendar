@@ -20,14 +20,7 @@ var server = require('http').Server(app.callback());
 
 app.get('/', function*() {
     this.body = {message: "Hello World"}
-})
-
-
-// EXAMPLE: call a database
-function getMessage() {
-
-}
-
+});
 
 server.listen(3000);
 console.log('server listening on port 3000');
