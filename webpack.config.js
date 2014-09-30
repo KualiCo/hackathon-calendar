@@ -1,10 +1,7 @@
-/* jshint node:true */
-'use strict';
-
 module.exports = {
-  entry: './client/main.jsx',
+  entry: './client/app/index.jsx',
   output: {
-    path: './client',
+    path: './client/build',
     filename: 'bundle.js'
   },
   module: {

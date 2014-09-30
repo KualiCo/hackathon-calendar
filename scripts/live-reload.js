@@ -3,6 +3,6 @@ var livereload = require('gulp-livereload');
 
 livereload.listen();
 
-watch('./client/bundle.js', function (filename) {
+watch('./client/build/bundle.js', function (filename) {
   livereload.changed();
 });

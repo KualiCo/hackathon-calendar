@@ -1,5 +1,5 @@
 {
-  "name": "hackathon-starter",
+  "name": "hackathon-calendar",
   "version": "0.0.0",
   "description": "",
   "repository": "",
@@ -12,18 +12,21 @@
   "license": "MIT",
   "devDependencies": {
     "css-loader": "^0.9.0",
+    "gulp-livereload": "^2.1.1",
     "jsx-loader": "^0.11.0",
+    "node-watch": "^0.3.4",
     "style-loader": "^0.8.0",
     "stylus-loader": "^0.4.0",
     "url-loader": "^0.5.5"
   },
   "dependencies": {
-    "react": "^0.11.2",
+    "axios": "^0.3.1",
+    "bluebird": "^2.3.4",
     "koa": "^0.12.2",
     "koa-body": "^0.3.0",
-    "koa-static": "^1.4.7",
     "koa-router": "^3.4.0",
-    "bluebird": "^2.3.4",
+    "koa-static": "^1.4.7",
+    "react": "^0.11.2",
     "rethinkdb": "^1.15.0-0"
   }
 }

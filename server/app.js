@@ -16,12 +16,12 @@ app.use(router(app));
 
 // --- Create Servers ----------------------------------------------------------
 
-var server = require('http').Server(app.callback());
-
-app.get('/', function*() {
-    this.body = {message: "Hello World"}
+app.get('/events', function*() {
+  this.body = [
+    { name: 'ENGL 101', days: 'MWF', time: 8 }
+  ];
 });
 
-server.listen(3000);
+app.listen(3000);
 console.log('server listening on port 3000');
 

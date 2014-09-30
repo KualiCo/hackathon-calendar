@@ -4,16 +4,16 @@
 
 var React = require('react');
 
-var HelloWorld = React.createClass({
+var Calendar = React.createClass({
 
   render: function() {
     return (
       <div>
-        Hello World
+        my lil calendar widget
       </div>
     );
   }
 
 });
 
-React.renderComponent(<HelloWorld/>, document.body);
+module.exports = Calendar;

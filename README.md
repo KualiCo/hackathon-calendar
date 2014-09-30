@@ -1,4 +1,4 @@
-Welcome to Hack Week! :)
+A simple calendar widget
 
 ##Prereqs
 
@@ -9,10 +9,13 @@ Welcome to Hack Week! :)
 
  - `npm install -g webpack`
  - `npm install`
+ - `cd client && bower install`
 
 ##Hack on it
 
-In two different terminal sessions run:
+In four different terminal sessions run:
 
+ - `rethinkdb`
  - `npm start`
  - `webpack -w`
+ - `npm run lr`
