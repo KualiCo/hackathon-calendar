@@ -2,12 +2,12 @@
  * @jsx React.DOM
  */
 
-var React = require('react');
+var React = window.React = require('react');
 var axios = require('axios');
 
-var Calendar = require('./calendar');
+var {Calendar, CalendarEvent} = require('./calendar');
 
-var HelloWorld = React.createClass({
+var App = React.createClass({
 
   getInitialState: function() {
     return {
@@ -20,9 +20,7 @@ var HelloWorld = React.createClass({
       this.setState({
         events: resp.data
       });
-    }.bind(this)).catch(function (err) {
-      console.error(err);
-    });
+    }.bind(this));
   },
 
   componentDidMount: function() {
@@ -30,14 +28,28 @@ var HelloWorld = React.createClass({
   },
 
   render: function() {
+
+    var mappedEvents = [];
+    _.each(this.state.events, function (event) {
+      _.each(event.dates, function (datepair) {
+        mappedEvents.push(
+          <CalendarEvent start={datepair.start} end={datepair.end}>
+            {event.title}
+          </CalendarEvent>
+        );
+      });
+    });
+
     return (
       <div className="row">
         <div className="small-12 column">
           <h1>Calendar Widget</h1>
-          <h3>Week / Time View</h3>
-          <Calendar events={this.state.events}/>
-          <h3>List View</h3>
-          <Calendar events={this.state.events} type="list"/>
+          <h3>Week View</h3>
+
+          <Calendar type="week">
+            {mappedEvents}
+          </Calendar>
+
         </div>
       </div>
     );
@@ -45,4 +57,8 @@ var HelloWorld = React.createClass({
 
 });
 
-React.renderComponent(<HelloWorld/>, document.body);
+React.renderComponent(<App/>, document.body);
+
+
+// <h3>List View</h3>
+// <Calendar title="Spring `14 Courses" events={this.state.events} type="list"/>

@@ -12,7 +12,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.json', '.jsx', 'index.jsx', '.styl']
-  }
+    extensions: ['', '.js', '.json', '.jsx', 'index.jsx', 'index.js', '.styl']
+  },
+  devtool: '#inline-source-map'
 };
-
