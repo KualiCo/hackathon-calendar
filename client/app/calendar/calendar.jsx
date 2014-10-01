@@ -19,12 +19,11 @@ var _times = _.map(_.range(24), function (num) {
 var Calendar = React.createClass({
 
   propTypes: {
-    type: React.PropTypes.string
+    collisionDetected: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
-      type: 'week',
       collisionDetected: Collisions.SIDE_BY_SIDE
     };
   },
@@ -42,7 +41,7 @@ var Calendar = React.createClass({
       );
     });
 
-    var children = _.isArray(this.props.children) ? this.props.children : [this.props.children];
+    var children = [].concat(this.props.children);
     _.each(children, function (child) {
       var c = child.props;
       var start = moment(c.start);

@@ -18,7 +18,20 @@
 
   .kc-event
     position absolute
-    background-color #b2b2f8
-    border-radius 5px
-    padding 5px
-    font-size 10px
+
+    >div
+      background-color #b2b2f8
+      border-radius 5px
+      padding 5px
+      font-size 10px
+      cursor: pointer
+      height: 100%
+      width: 100%
+
+      &.chosen
+        border: 3px solid blue
+
+    &.kc-conflicted
+      >div
+        background-color: red
+

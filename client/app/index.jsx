@@ -12,7 +12,8 @@ var App = React.createClass({
 
   getInitialState: function() {
     return {
-      events: []
+      events: [],
+      selectedID: 0
     };
   },
 
@@ -28,17 +29,25 @@ var App = React.createClass({
     this.getEvents();
   },
 
+  onClick: function (id) {
+    if (this.state.selectedID === id) id = 0;
+    this.setState({ selectedID: id });
+  },
+
   render: function() {
     var mappedEvents = [];
     _.each(this.state.events, function (event, i) {
       _.each(event.dates, function (datepair, j) {
+        var classes = this.state.selectedID - 1 === i ? 'chosen' : '';
         mappedEvents.push(
-          <CalendarEvent start={datepair.start} end={datepair.end} key={i * 5 + j}>
-            {event.title}
+          <CalendarEvent start={datepair.start} end={datepair.end} onClick={this.onClick} key={i * 5 + j} id={i + 1}>
+            <div className={classes}>
+              {event.title}
+            </div>
           </CalendarEvent>
         );
-      });
-    });
+      }.bind(this));
+    }.bind(this));
 
     return (
       <div className="row">
@@ -46,7 +55,7 @@ var App = React.createClass({
           <h1>Calendar Widget</h1>
           <h3>Week View</h3>
 
-          <Calendar type="week" collisionDetected={Collisions.SIDE_BY_SIDE}>
+          <Calendar collisionDetected={Collisions.SIDE_BY_SIDE}>
             {mappedEvents}
           </Calendar>
 
