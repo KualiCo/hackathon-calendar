@@ -6,7 +6,7 @@ var React = window.React = require('react');
 var axios = require('axios');
 var     _ = require('lodash');
 
-var {Calendar, CalendarEvent} = require('./calendar');
+var {Calendar, CalendarEvent, Collisions} = require('./calendar');
 
 var App = React.createClass({
 
@@ -29,12 +29,11 @@ var App = React.createClass({
   },
 
   render: function() {
-
     var mappedEvents = [];
-    _.each(this.state.events, function (event) {
-      _.each(event.dates, function (datepair) {
+    _.each(this.state.events, function (event, i) {
+      _.each(event.dates, function (datepair, j) {
         mappedEvents.push(
-          <CalendarEvent start={datepair.start} end={datepair.end}>
+          <CalendarEvent start={datepair.start} end={datepair.end} key={i * 5 + j}>
             {event.title}
           </CalendarEvent>
         );
@@ -47,7 +46,7 @@ var App = React.createClass({
           <h1>Calendar Widget</h1>
           <h3>Week View</h3>
 
-          <Calendar type="week">
+          <Calendar type="week" collisionDetected={Collisions.SIDE_BY_SIDE}>
             {mappedEvents}
           </Calendar>
 

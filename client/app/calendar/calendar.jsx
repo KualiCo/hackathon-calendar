@@ -5,6 +5,7 @@
 var  React = require('react');
 var moment = require('moment');
 var      _ = require('lodash');
+var Collisions = require('./collisions');
 require('./style');
 
 var _days = _.map(_.range(7), function (num) {
@@ -23,7 +24,8 @@ var Calendar = React.createClass({
 
   getDefaultProps: function() {
     return {
-      type: 'week'
+      type: 'week',
+      collisionDetected: Collisions.SIDE_BY_SIDE
     };
   },
 
@@ -40,16 +42,33 @@ var Calendar = React.createClass({
       );
     });
 
-    _.each(this.props.children, function (child) {
-      var start = moment(child.props.start);
-      var end = moment(child.props.end);
+    var children = _.isArray(this.props.children) ? this.props.children : [this.props.children];
+    _.each(children, function (child) {
+      var c = child.props;
+      var start = moment(c.start);
+      var end = moment(c.end);
       var day = start.day();
       var time = start.hours() * 60 + start.minutes();
       var duration = (end.hours() * 60 + end.minutes()) - time;
-      child.props.left = 'calc(' + (day * (100 / 7) + '%') + ' + 5px)'
-      child.props.top = (time / (24 * 60)) * 100 + '%';
-      child.props.height = (duration / (24 * 60)) * 100 + '%';
-    });
+
+      c.left = 'calc(' + (day * (100 / 7) + '%') + ' + 5px)'
+      c.width = 'calc(100% / 7 - 10px)';
+      c.top = (time / (24 * 60)) * 100 + '%';
+      c.height = (duration / (24 * 60)) * 100 + '%';
+      c.visible = true;
+
+      var collisions = _.filter(children, function (child2) {
+        var c2 = child2.props;
+        return (c.start < c2.end && c.end > c2.start);
+      });
+      if (collisions.length > 1) {
+        collisions.sort(function (a, b) {
+          return (a.props.start - b.props.start) || (a.props.key - b.props.key);
+        });
+        var pos = _.indexOf(collisions, child);
+        this.props.collisionDetected(c, pos, collisions);
+      }
+    }.bind(this));
 
     return (
       <div className="kc-calendar">
