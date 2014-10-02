@@ -2,7 +2,7 @@
  * @jsx React.DOM
  */
 
-var React = window.React = require('react');
+var React = window.React = require('react/addons');
 var axios = require('axios');
 var     _ = require('lodash');
 require('./style');
@@ -42,7 +42,9 @@ var App = React.createClass({
     var key = 0;
     _.each(this.state.events, function (event, i) {
       _.each(event.dates, function (datepair, j) {
-        var classes = sID === i ? 'chosen' : '';
+        var classes = React.addons.classSet({
+          chosen: sID === i
+        });
         mappedEvents.push(
           <CalendarEvent start={datepair.start} end={datepair.end} onClick={this.onClick} id={i + 1}>
             <div className={classes}>
