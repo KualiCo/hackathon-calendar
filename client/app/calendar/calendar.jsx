@@ -29,15 +29,15 @@ var Calendar = React.createClass({
   },
 
   render: function() {
-    var times = _times.map(function (time) {
+    var times = _times.map(function (time, i) {
       return (
-        <div>{time}</div>
+        <div key={'kc-time-' + i}>{time}</div>
       );
     });
 
-    var days = _days.map(function (day) {
+    var days = _days.map(function (day, i) {
       return (
-        <div>{day}</div>
+        <div key={'kc-day-' + i}>{day}</div>
       );
     });
 
@@ -50,10 +50,10 @@ var Calendar = React.createClass({
       var time = start.hours() * 60 + start.minutes();
       var duration = (end.hours() * 60 + end.minutes()) - time;
 
-      c.left = 'calc(' + (day * (100 / 7) + '%') + ' + 5px)'
-      c.width = 'calc(100% / 7 - 10px)';
-      c.top = (time / (24 * 60)) * 100 + '%';
-      c.height = (duration / (24 * 60)) * 100 + '%';
+      c.left = day * 100 / 7 + '%';
+      c.width = 100 / 7 + '%';
+      c.top = time / 24 / 60 * 100 + '%';
+      c.height = duration / 24 / 60 * 100 + '%';
       c.visible = true;
 
       var collisions = _.filter(children, function (child2) {
@@ -74,7 +74,7 @@ var Calendar = React.createClass({
         <div className="kc-times">{times}</div>
         <div className="kc-calendar-content">
           <div className="kc-days">{days}</div>
-          <div>{this.props.children}</div>
+          <div className="kc-events">{this.props.children}</div>
         </div>
       </div>
     );

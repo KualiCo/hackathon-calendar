@@ -1,11 +1,12 @@
 var Promise = require('bluebird');
 
-var db = ['ENGL 101', 'CHEM 123', 'SCREAM 400', 'WOOT 777'].map(function (title) {
-  return {
-    title: title,
-    dates: _getDates()
-  };
-});
+var courseTitles = 'ENGL,CHEM,SCREAM,WOOT,MATH,CS'.split(',');
+
+var db = [];
+
+for (var i = 0; i < 10; ++i) {
+  db.push(_createCourse());
+}
 
 // --- Exported Functions ------------------------------------------------------
 
@@ -14,6 +15,15 @@ exports.getAll = function () {
 };
 
 // --- Private Functions -------------------------------------------------------
+
+function _createCourse() {
+  var prefix = courseTitles[Math.floor(Math.random() * courseTitles.length)];
+  var number = Math.floor(Math.random() * 899) + 100
+  return {
+    title: prefix + ' ' + number,
+    dates: _getDates()
+  };
+}
 
 function _getDates() {
   var num = Math.random();

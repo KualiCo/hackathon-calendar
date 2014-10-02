@@ -5,7 +5,9 @@
 var React = window.React = require('react');
 var axios = require('axios');
 var     _ = require('lodash');
+require('./style');
 
+var CourseDetails = require('./course-details');
 var {Calendar, CalendarEvent, Collisions} = require('./calendar');
 
 var App = React.createClass({
@@ -35,10 +37,11 @@ var App = React.createClass({
   },
 
   render: function() {
+    var sID = this.state.selectedID - 1;
     var mappedEvents = [];
     _.each(this.state.events, function (event, i) {
       _.each(event.dates, function (datepair, j) {
-        var classes = this.state.selectedID - 1 === i ? 'chosen' : '';
+        var classes = sID === i ? 'chosen' : '';
         mappedEvents.push(
           <CalendarEvent start={datepair.start} end={datepair.end} onClick={this.onClick} key={i * 5 + j} id={i + 1}>
             <div className={classes}>
@@ -49,15 +52,20 @@ var App = React.createClass({
       }.bind(this));
     }.bind(this));
 
+    var selected = sID > -1 ? this.state.events[sID] : null;
+
     return (
       <div className="row">
         <div className="small-12 column">
           <h1>Calendar Widget</h1>
-          <h3>Week View</h3>
 
+          <h3>Week View</h3>
           <Calendar collisionDetected={Collisions.SIDE_BY_SIDE}>
             {mappedEvents}
           </Calendar>
+
+          <h3>Details</h3>
+          <CourseDetails course={selected}/>
 
         </div>
       </div>

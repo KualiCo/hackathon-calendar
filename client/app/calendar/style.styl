@@ -1,37 +1,41 @@
 .kc-calendar
   position relative
-  width 633px
-  height 610px
+  display inline-block
+  height 596px
 
   .kc-times
     position absolute
-    top 30px
+    top 20px
+
+    >div
+      width 640px
+
+      &:nth-of-type(2n + 1)
+        background-color #f1f1f1
 
   .kc-calendar-content
-    margin-left 60px
     position relative
+    margin-left 60px
     height 100%
+
+  .kc-events
+    position absolute
+    top 20px
+    bottom 0
+    left 0
+    right 0
+
 
   .kc-days>div
     display inline-block
     padding 0 10px
+    width calc(100% / 7)
+    overflow hidden
+    border-left 1px solid
+    height 100%
+
+    &:last-of-type
+      border-right 1px solid
 
   .kc-event
     position absolute
-
-    >div
-      background-color #b2b2f8
-      border-radius 5px
-      padding 5px
-      font-size 10px
-      cursor: pointer
-      height: 100%
-      width: 100%
-
-      &.chosen
-        border: 3px solid blue
-
-    &.kc-conflicted
-      >div
-        background-color: red
-
