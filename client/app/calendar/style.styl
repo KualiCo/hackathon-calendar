@@ -1,14 +1,16 @@
 .kc-calendar
   position relative
   display inline-block
-  height 596px
 
   .kc-times
     position absolute
     top 20px
+    width 100%
+    height calc(100% - 20px)
 
     >div
-      width 640px
+      width 100%
+      height calc(100% / 24)
 
       &:nth-of-type(2n + 1)
         background-color #f1f1f1
@@ -28,14 +30,19 @@
 
   .kc-days>div
     display inline-block
+    text-align center
     padding 0 10px
     width calc(100% / 7)
     overflow hidden
-    border-left 1px solid
+    border-left 1px solid #ddd
+    border-right 1px solid #ddd
     height 100%
 
+    &:first-of-type
+      border-left 2px solid #ddd
+
     &:last-of-type
-      border-right 1px solid
+      border-right 2px solid #ddd
 
   .kc-event
     position absolute
