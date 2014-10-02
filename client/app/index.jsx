@@ -43,7 +43,7 @@ var App = React.createClass({
     _.each(this.state.events, function (event, i) {
       _.each(event.dates, function (datepair, j) {
         var classes = React.addons.classSet({
-          chosen: sID === i
+          selected: sID === i
         });
         mappedEvents.push(
           <CalendarEvent start={datepair.start} end={datepair.end} onClick={this.onClick} id={i + 1}>
