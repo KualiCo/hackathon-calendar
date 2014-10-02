@@ -2,7 +2,7 @@ A simple calendar widget
 
 ##Todo
 
- [ ] Calendar shouldn't depend on CalendarEvent's key to exist or be a number.
+ [x] Calendar shouldn't depend on CalendarEvent's key to exist or be a number.
  [x] Allow for custom widths and heights
  [x] Rework styles for padding and such
  [ ] Idea: custom renderer functions?

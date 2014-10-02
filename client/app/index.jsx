@@ -39,11 +39,12 @@ var App = React.createClass({
   render: function() {
     var sID = this.state.selectedID - 1;
     var mappedEvents = [];
+    var key = 0;
     _.each(this.state.events, function (event, i) {
       _.each(event.dates, function (datepair, j) {
         var classes = sID === i ? 'chosen' : '';
         mappedEvents.push(
-          <CalendarEvent start={datepair.start} end={datepair.end} onClick={this.onClick} key={i * 5 + j} id={i + 1}>
+          <CalendarEvent start={datepair.start} end={datepair.end} onClick={this.onClick} id={i + 1}>
             <div className={classes}>
               {event.title}
             </div>

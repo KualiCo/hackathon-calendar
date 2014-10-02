@@ -18,11 +18,6 @@ app.use(router(app));
 
 // --- Load Routes -------------------------------------------------------------
 
-app.get('/test/:name/woot', function *() {
-  console.log(this.params);
-  console.log(this.query);
-});
-
 fs.readdirSync(__dirname + '/routes').forEach(function (filename) {
   if (filename === '.DS_Store') return;
   require('./routes/' + filename)(app);

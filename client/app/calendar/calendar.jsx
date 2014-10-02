@@ -8,11 +8,14 @@ var      _ = require('lodash');
 var Collisions = require('./collisions');
 require('./style');
 
-var _days = _.map(_.range(7), function (num) {
+var NUM_DAYS = 7;
+var NUM_TIMES = 24;
+
+var _days = _.map(_.range(NUM_DAYS), function (num) {
   return moment().day(num).format('dddd');
 });
 
-var _times = _.map(_.range(24), function (num) {
+var _times = _.map(_.range(NUM_TIMES), function (num) {
   return (num % 12 || 12) + (num < 12 ? ' am' : ' pm');
 });
 
@@ -30,14 +33,16 @@ var Calendar = React.createClass({
 
   render: function() {
     var times = _times.map(function (time, i) {
+      var divStyle= { height: 'calc(100% / ' + NUM_TIMES + ')' };
       return (
-        <div key={'kc-time-' + i}>{time}</div>
+        <div style={divStyle} key={'kc-time-' + i}>{time}</div>
       );
     });
 
     var days = _days.map(function (day, i) {
+      var divStyle = { width: 'calc(100% / ' + NUM_DAYS + ')' };
       return (
-        <div key={'kc-day-' + i}>{day}</div>
+        <div style={divStyle} key={'kc-day-' + i}>{day}</div>
       );
     });
 
@@ -50,10 +55,10 @@ var Calendar = React.createClass({
       var time = start.hours() * 60 + start.minutes();
       var duration = (end.hours() * 60 + end.minutes()) - time;
 
-      c.left = day * 100 / 7 + '%';
-      c.width = 100 / 7 + '%';
-      c.top = time / 24 / 60 * 100 + '%';
-      c.height = duration / 24 / 60 * 100 + '%';
+      c.left = day * 100 / NUM_DAYS + '%';
+      c.width = 100 / NUM_DAYS + '%';
+      c.top = time / NUM_TIMES / 60 * 100 + '%';
+      c.height = duration / NUM_TIMES / 60 * 100 + '%';
       c.visible = true;
 
       var collisions = _.filter(children, function (child2) {
@@ -62,7 +67,7 @@ var Calendar = React.createClass({
       });
       if (collisions.length > 1) {
         collisions.sort(function (a, b) {
-          return (a.props.start - b.props.start) || (a.props.key - b.props.key);
+          return (a.props.start - b.props.start);
         });
         var pos = _.indexOf(collisions, child);
         this.props.collisionDetected(c, pos, collisions);
