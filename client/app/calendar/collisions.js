@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 exports.SIDE_BY_SIDE = function (event, i, collisions) {
   event.conflicted = true;
   var day = moment(event.start).day();
